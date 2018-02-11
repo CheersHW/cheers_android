@@ -1,0 +1,18 @@
+<tabs>
+    <tab
+        icon="@drawable/shape"
+        id="@+id/main_home"
+        title="메인 화면" />
+    <tab
+        icon="@drawable/cheer"
+        id="@+id/main_cheer"
+        title="실시간 응원" />
+    <tab
+        icon="@drawable/cheerline"
+        id="@+id/main_cheerline"
+        title="응원 구호" />
+    <tab
+        icon="@drawable/info"
+        id="@+id/main_info"
+        title="내 정보" />
+</tabs>
