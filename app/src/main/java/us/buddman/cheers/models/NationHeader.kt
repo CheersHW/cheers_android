@@ -4,7 +4,7 @@ package us.buddman.cheers.models
  * Created by Chad Park on 2018-02-11.
  */
 data class NationHeader(
-        val country: String, val gold: Int, val silver: Int, val bronze: Int, val rank: Int
+        val title : String, val country: String, val gold: Int, val silver: Int, val bronze: Int, val rank: Int
 ) {
     val rankingText: String
         get() = rank.toString() + "위"

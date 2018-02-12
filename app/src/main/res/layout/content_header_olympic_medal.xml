@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:layout_marginTop="16dp"
-            android:text="올림픽 메달 현황"
+            android:text="@{content.title}"
             android:textColor="@color/commonDarkBlue"
             android:textStyle="bold" />
 

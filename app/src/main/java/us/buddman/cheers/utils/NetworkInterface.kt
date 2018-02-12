@@ -23,6 +23,10 @@ public interface NetworkInterface {
     @GET("/news")
     fun getNews(): Call<ArrayList<News>>
 
+    @POST("/aid/rank")
+    fun getCheerRank(): Call<ArrayList<Nation>>
+
+
     @POST("/auth/login")
     @FormUrlEncoded
     fun loginByLocal(@Field("email") email: String, @Field("password") password: String): Call<User>

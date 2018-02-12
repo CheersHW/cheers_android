@@ -45,15 +45,15 @@ class MainDashboardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         mainDashBoardRV.layoutManager = LinearLayoutManager(context)
         mainDashBoardRV.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager(context).orientation))
-        fetchOlympicsMedal()
-        mainLiveContainer.setOnClickListener{
-            NetworkHelper.networkInstance.getYoutubeId().enqueue(object : Callback<ResponseBody>{
+        fetchCheerMedal()
+        mainLiveContainer.setOnClickListener {
+            NetworkHelper.networkInstance.getYoutubeId().enqueue(object : Callback<ResponseBody> {
                 override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
                     ErrorHelper.logError(t!!.localizedMessage)
                 }
 
                 override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>?) {
-                    when(response!!.code()){
+                    when (response!!.code()) {
                         200 -> {
                             startActivity(Intent(context, YoutubeShowActivity::class.java).putExtra("videoId", response.body()!!.string()))
                         }
@@ -64,6 +64,24 @@ class MainDashboardFragment : Fragment() {
     }
 
     fun fetchCheerMedal() {
+        NetworkHelper.networkInstance.getCheerRank().enqueue(object : Callback<ArrayList<Nation>> {
+            override fun onFailure(call: Call<ArrayList<Nation>>?, t: Throwable?) {
+                ErrorHelper.logError(t!!.localizedMessage)
+            }
+
+            override fun onResponse(call: Call<ArrayList<Nation>>, response: Response<ArrayList<Nation>>) {
+                when (response.code()) {
+                    200 -> {
+                        bindingArray.add(getKorea(response.body()!!, 0)!!)
+                        for (nation in response.body()!!) {
+                            bindingArray.add(nation)
+                        }
+                        fetchOlympicsMedal()
+                    }
+                }
+            }
+
+        })
     }
 
     fun fetchOlympicsMedal() {
@@ -75,7 +93,7 @@ class MainDashboardFragment : Fragment() {
             override fun onResponse(call: Call<ArrayList<Nation>>, response: Response<ArrayList<Nation>>) {
                 when (response.code()) {
                     200 -> {
-                        bindingArray.add(getKorea(response.body()!!)!!)
+                        bindingArray.add(getKorea(response.body()!!, 1)!!)
                         for (nation in response.body()!!) {
                             bindingArray.add(nation)
                         }
@@ -133,11 +151,11 @@ class MainDashboardFragment : Fragment() {
 
     }
 
-    fun getKorea(nationArray: ArrayList<Nation>): NationHeader? {
+    fun getKorea(nationArray: ArrayList<Nation>, type: Int): NationHeader? {
         nationArray
                 .filter { it.country == "대한민국" }
                 .forEach {
-                    return NationHeader(it.country, it.gold, it.silver, it.bronze, it.rank)
+                    return NationHeader(if (type == 0) "응원메달 현황" else "올림픽 메달 현황", it.country, it.gold, it.silver, it.bronze, it.rank)
                 }
         return null
     }

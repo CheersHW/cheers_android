@@ -2,6 +2,7 @@ package us.buddman.cheers.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
@@ -25,7 +26,12 @@ public class YoutubeShowActivity extends YouTubeFailureRecoveryActivity {
         videoId = intent.getStringExtra("videoId");
         YouTubePlayerView youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
         youTubeView.initialize(DeveloperService.ANDROID_DEVELOPER_KEY, this);
-
+        findViewById(R.id.comment).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), CommentActivity.class));
+            }
+        });
     }
 
     @Override

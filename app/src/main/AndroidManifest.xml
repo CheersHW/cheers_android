@@ -13,7 +13,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,15 +20,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity"></activity>
-        <activity android:name=".activity.RegisterActivity"></activity>
-        <activity android:name=".activity.LoginActivity"></activity>
+        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.LoginActivity" />
         <activity
             android:name=".activity.YoutubeShowActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="nosensor"></activity>
+            android:screenOrientation="nosensor" />
         <activity android:name=".activity.LivePopupActivity" />
-        <activity android:name=".activity.CheerLineAddActivity"></activity>
+        <activity android:name=".activity.CheerLineAddActivity" />
+        <activity android:name=".activity.CommentActivity"></activity>
     </application>
 
 </manifest>
